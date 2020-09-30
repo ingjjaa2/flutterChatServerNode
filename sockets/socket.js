@@ -22,7 +22,7 @@ io.on('connection', (client) => {
 
     client.on('disconnect',()=>{
         usuarioDesconectado(uid);
-        io.emit('user-disconnected',uid);
+        io.emit('user-connected',{'userID':uid,'action':false});
     })
 
     // console.log('Cliente conectado');
