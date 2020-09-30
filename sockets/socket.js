@@ -13,6 +13,8 @@ io.on('connection', (client) => {
 
     client.join(uid);
 
+    io.emit('user-connected',{'userID':uid,'action':true});
+
     client.on('mensaje-personal', async(payload)=>{
         await grabarMensaje(payload);
         io.to(payload.para).emit('mensaje-personal', payload);
@@ -20,6 +22,7 @@ io.on('connection', (client) => {
 
     client.on('disconnect',()=>{
         usuarioDesconectado(uid);
+        io.emit('user-disconnected',uid);
     })
 
     // console.log('Cliente conectado');
